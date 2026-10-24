@@ -74,10 +74,10 @@
     ':host{all:initial}' +
     '*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}' +
     '.flot{position:fixed;bottom:18px;' + LADO + ':16px;z-index:2147483000;display:flex;flex-direction:column;align-items:' + (LADO === 'left' ? 'flex-start' : 'flex-end') + ';gap:10px}' +
-    '.ico{position:relative;display:flex;align-items:center;gap:0;height:52px;min-width:52px;padding:0 15px;border:0;border-radius:999px;cursor:pointer;background:#0f172a;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 0 2px var(--c);overflow:hidden;transition:gap .35s,padding .35s}' +
+    '.ico{position:relative;display:flex;align-items:center;gap:0;height:44px;min-width:44px;padding:0 12px;border:0;border-radius:999px;cursor:pointer;background:#0f172a;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 0 2px var(--c);overflow:hidden;transition:gap .35s,padding .35s}' +
     '.ico svg{flex:none;width:22px;height:22px}' +
     '.ico .lb{max-width:0;white-space:nowrap;overflow:hidden;font-weight:800;font-size:13px;letter-spacing:.4px;transition:max-width .4s}' +
-    '.ico.abre{gap:8px}.ico.abre .lb{max-width:120px}' +
+    '.ico.abre{gap:8px}.ico.abre .lb{max-width:150px}' +
     '.ico:before{content:"";position:absolute;inset:-2px;border-radius:999px;box-shadow:0 0 0 0 var(--c);animation:pul 2.4s infinite}' +
     '@keyframes pul{0%{box-shadow:0 0 0 0 var(--c);opacity:.7}80%,100%{box-shadow:0 0 0 14px transparent;opacity:0}}' +
     '.ico:focus-visible,.cta:focus-visible,.x:focus-visible{outline:3px solid #fff;outline-offset:3px}' +
@@ -121,7 +121,7 @@
 
     raiz.innerHTML = '<style>' + CSS + ':host{--c:' + color + '}.flot,.inline{--c:' + color + '}</style>' +
       (lugar ? '<div class="inline">' + tarjeta(ad, false) + '</div>'
-             : '<div class="flot"><div class="pan"></div><button class="ico" type="button" aria-expanded="false" aria-label="Ver publicidad">' + MEGAFONO + '<span class="lb">Publicidad</span></button></div>');
+             : '<div class="flot"><div class="pan"></div><button class="ico" type="button" aria-expanded="false" aria-label="' + esc(ad.etiqueta || 'Publicidad') + '">' + MEGAFONO + '<span class="lb">' + esc(ad.etiqueta || 'Publicidad') + '</span></button></div>');
 
     (lugar || document.body).appendChild(host);
 
@@ -147,7 +147,14 @@
       }
     }
 
-    ico.addEventListener('click', function () { abrir(!abierto); });
+    ico.addEventListener('click', function () {
+      if (ad.modo === 'directo') {           // el ícono lleva directo a la página, sin tarjeta
+        contar('toque', ad);
+        window.open(enlace(ad), '_blank', 'noopener');
+        return;
+      }
+      abrir(!abierto);
+    });
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && abierto) abrir(false); });
 
     // el ícono se presenta un momento ("Publicidad") y vuelve a quedar pequeño
