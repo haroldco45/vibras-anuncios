@@ -1,0 +1,37 @@
+{
+  "contador": "vibrasanuncios",
+  "anuncios": [
+    {
+      "id": "vphm-apps",
+      "activo": true,
+      "titulo": "Tu negocio merece tecnología real",
+      "texto": "Apps como esta para tu negocio: menú con pedidos por WhatsApp, tarjetas digitales con QR, ventas e inventario.",
+      "boton": "Ver Vibras Positivas HM",
+      "url": "https://www.vibraspositivashm.com/",
+      "marca": "Vibras Positivas HM",
+      "inicial": "V",
+      "color": "#FCD116",
+      "apps": ["*"],
+      "excluir": [],
+      "desde": "2026-10-24",
+      "hasta": "",
+      "peso": 3
+    },
+    {
+      "id": "anunciate-aqui",
+      "activo": true,
+      "titulo": "Tu negocio aquí",
+      "texto": "Anúnciate en más de 60 apps de Vibras Positivas HM: noticias, ciudades, negocios. Tú eliges dónde sale tu anuncio.",
+      "boton": "Quiero anunciarme",
+      "url": "https://wa.me/573117700431?text=Hola%20Harold%2C%20quiero%20anunciar%20mi%20negocio%20en%20tus%20apps",
+      "marca": "Espacio publicitario",
+      "inicial": "+",
+      "color": "#22c55e",
+      "apps": ["*"],
+      "excluir": [],
+      "desde": "2026-10-24",
+      "hasta": "",
+      "peso": 1
+    }
+  ]
+}
