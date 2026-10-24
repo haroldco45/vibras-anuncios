@@ -4,11 +4,11 @@
     {
       "id": "vphm",
       "activo": true,
-      "modo": "tarjeta",
+      "modo": "ventana",
       "etiqueta": "Vibras Positivas HM",
       "titulo": "Tu negocio merece tecnología real",
       "texto": "Apps como esta para tu negocio: menú con pedidos por WhatsApp, tarjetas digitales con QR, ventas e inventario.",
-      "boton": "Ver Vibras Positivas HM",
+      "boton": "Abrir página completa",
       "url": "https://www.vibraspositivashm.com/",
       "marca": "Vibras Positivas HM",
       "inicial": "V",

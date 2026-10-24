@@ -96,6 +96,14 @@
     '.x{position:absolute;top:8px;right:8px;width:32px;height:32px;border:0;border-radius:50%;background:transparent;color:#9fb0d4;cursor:pointer;font-size:20px;line-height:1}' +
     '.x:hover{background:#1c2a4d;color:#fff}' +
     '.inline .card{width:100%;animation:none}' +
+    '.vent{width:min(390px,calc(100vw - 32px));height:min(580px,calc(100vh - 120px));display:flex;flex-direction:column;padding:0}' +
+    '.vent .cab{display:flex;align-items:center;gap:8px;padding:10px 46px 10px 12px;border-bottom:1px solid #26365e}' +
+    '.vent .cab .mar{font-size:13px;color:#eef2fb;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
+    '.vent .x{top:5px}' +
+    '.vent .marco{position:relative;flex:1;background:#fff}' +
+    '.vent iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}' +
+    '.vent .carga{position:absolute;inset:0;display:grid;place-items:center;color:#475569;font-size:13px;font-weight:600}' +
+    '.vent .cta{margin:10px 12px 12px;min-height:40px;font-size:13px}' +
     '@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}' +
     '@media print{:host{display:none}}';
 
@@ -109,6 +117,17 @@
       '<div><div class="mar">' + esc(ad.marca) + '</div><div class="ti">' + esc(ad.titulo) + '</div></div></div>' +
       (ad.texto ? '<p class="tx">' + esc(ad.texto) + '</p>' : '') +
       '<a class="cta" href="' + esc(enlace(ad)) + '" target="_blank" rel="noopener sponsored">' + esc(ad.boton || 'Ver m\u00e1s') + ' \u2192</a>' +
+      '</div>';
+  }
+
+  /* la página del anunciante dentro de un cuadrito, sin salir de la app */
+  function ventana(ad) {
+    return '<div class="card vent" role="dialog" aria-label="Publicidad: ' + esc(ad.marca) + '">' +
+      '<button class="x" type="button" aria-label="Cerrar publicidad">\u00d7</button>' +
+      '<div class="cab"><span class="tag">Publicidad</span><span class="mar">' + esc(ad.marca) + '</span></div>' +
+      '<div class="marco"><div class="carga">Cargando\u2026</div>' +
+      '<iframe src="' + esc(enlace(ad)) + '" title="' + esc(ad.marca) + '" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>' +
+      '<a class="cta" href="' + esc(enlace(ad)) + '" target="_blank" rel="noopener sponsored">' + esc(ad.boton || 'Abrir p\u00e1gina completa') + ' \u2192</a>' +
       '</div>';
   }
 
@@ -140,7 +159,8 @@
     function abrir(v) {
       abierto = v;
       ico.setAttribute('aria-expanded', v ? 'true' : 'false');
-      pan.innerHTML = v ? tarjeta(ad, true) : '';
+      pan.innerHTML = v ? (ad.modo === 'ventana' ? ventana(ad) : tarjeta(ad, true)) : '';
+      if (v && ad.modo === 'ventana') contar('toque', ad);
       if (v) {
         var x = pan.querySelector('.x');
         x.addEventListener('click', function () { abrir(false); ico.focus(); });
